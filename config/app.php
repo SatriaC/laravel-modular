@@ -168,6 +168,8 @@ return [
          * Package Service Providers...
          */
 
+        // GTI Package
+        GTI\OrganizationStructure\OrganizationStructureServiceProvider::class,
         /*
          * Application Service Providers...
          */

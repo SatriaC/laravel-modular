@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::connection('mysql_master')->create('divisions', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->integer('organization_id')->nullable();
             $table->tinyInteger('status')->default(1);
             $table->integer('created_by')->nullable();
             $table->integer('updated_by')->nullable();

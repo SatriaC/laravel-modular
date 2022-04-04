@@ -13,10 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::connection('mysql_master')->create('departments', function (Blueprint $table) {
+        Schema::connection('mysql_master')->create('organizations', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->integer('division_id')->nullable();
             $table->tinyInteger('status')->default(1);
             $table->integer('created_by')->nullable();
             $table->integer('updated_by')->nullable();
@@ -33,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::connection('mysql_master')->dropIfExists('departments');
+        Schema::connection('mysql_master')->dropIfExists('organizations');
     }
 };

@@ -1,33 +1,41 @@
 <?php
 
-namespace App\Services;
+namespace GTI\OrganizationStructure\Services;
 
 use App\Helpers\Pagination;
-use App\Repositories\Master\PositionRepository;
 use App\Services\BaseService;
 use Carbon\Carbon;
 use Exception;
+use GTI\OrganizationStructure\Repositories\DepartmentRepository;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
-class PositionService extends BaseService
+class DepartmentService extends BaseService
 {
     protected $repo;
 
     public function __construct(
-        PositionRepository $repo,
+        DepartmentRepository $repo,
     ) {
         parent::__construct();
         $this->repo = $repo;
     }
 
-    public function all($request)
+    public function all()
     {
-        // not fix yet
-        $data =  $this->repo->all($request);
-        return Pagination::paginate($data);
+        # code...
+        return $this->repo->with('division');
     }
+
+    public function index($request)
+    {
+        $data =  $this->repo->index($request);
+
+        return Pagination::paginate($data, $request);
+    }
+
+
 
     public function store($request)
     {
@@ -36,6 +44,7 @@ class PositionService extends BaseService
         try {
             # code...
             $data = $request->all();
+            $data['created_by'] = Auth::guard('api')->user()->id;
             $item = $this->repo->create($data);
             $db->commit();
 
@@ -56,6 +65,7 @@ class PositionService extends BaseService
         try {
             # code...
             $data = $request->all();
+            $data['updated_by'] = Auth::guard('api')->user()->id;
             $this->repo->update($data, $id);
             $db->commit();
 
@@ -89,6 +99,8 @@ class PositionService extends BaseService
         # code...
         try {
             # code...
+            $data['deleted_by'] = Auth::guard('api')->user()->id;
+            $this->repo->update($data, $id);
             $this->repo->delete($id);
             return $this->responseMessage(__('content.message.delete.success'), 200, true);
         } catch (\Throwable $exc) {
@@ -97,6 +109,5 @@ class PositionService extends BaseService
             return $this->responseMessage(__('content.message.delete.failed'), 400, false);
         }
     }
-
 
 }

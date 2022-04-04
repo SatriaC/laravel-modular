@@ -1,24 +1,30 @@
 <?php
 
-namespace App\Http\Controllers\Master;
+namespace GTI\OrganizationStructure\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Services\DepartmentService;
+use GTI\OrganizationStructure\Services\PositionService;
 use Illuminate\Http\Request;
 
-class DepartmentController extends Controller
+class PositionController extends Controller
 {
 
     protected $service;
 
     public function __construct(
-        DepartmentService $service
+        PositionService $service
     )
     {
         $this->service = $service;
     }
 
     public function index(Request $request)
+    {
+        # code...
+        return $this->service->index($request);
+    }
+
+    public function all(Request $request)
     {
         # code...
         return $this->service->all($request);
