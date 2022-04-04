@@ -12,4 +12,46 @@ class EmployeeRepository extends BaseRepository
         $this->model = $model;
     }
 
+    public function index($request)
+    {
+        # code...
+        $data = $this->model
+        ->orderBy('created_at', 'desc')
+        ->select(['employees.*']);
+
+        if (isset($request->name)) {
+            # code...
+            $data->where('name', 'LIKE', '%'.$request->name.'%' );
+        }
+
+        if (isset($request->phone)) {
+            # code...
+            $data->where('phone', $request->phone );
+        }
+
+        if (isset($request->nip)) {
+            # code...
+            $data->where('nip', $request->nip );
+        }
+
+        if (isset($request->status)) {
+            # code...
+            $data->where('status', $request->status );
+        }
+
+        if (isset($request->manager_id)) {
+            # code...
+            $data->where('manager_id', $request->manager_id );
+        }
+
+        return $data;
+    }
+
+    public function getById($id)
+    {
+        $datas = $this->model->with(['user'])->find($id);
+
+        return $datas;
+    }
+
 }

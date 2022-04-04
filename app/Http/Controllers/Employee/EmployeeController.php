@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Employee;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Employees\EmployeeRequest;
 use App\Services\EmployeeService;
 use Illuminate\Http\Request;
 
@@ -21,10 +22,10 @@ class EmployeeController extends Controller
     public function index(Request $request)
     {
         # code...
-        return $this->service->all($request);
+        return $this->service->index($request);
     }
 
-    public function store(Request $request)
+    public function store(EmployeeRequest $request)
     {
         # code...
         return $this->service->store($request);
@@ -46,5 +47,17 @@ class EmployeeController extends Controller
     {
         # code...
         return $this->service->destroy($id);
+    }
+
+    public function import(Request $request)
+    {
+        # code...
+        return $this->service->import($request);
+    }
+
+    public function export()
+    {
+        # code...
+        return $this->service->export();
     }
 }

@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('employees', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nip')->nullable();
+            $table->string('nik')->nullable();
             $table->string('name')->nullable();
             $table->string('gender')->nullable();
             $table->date('birthdate')->nullable();
@@ -23,12 +24,14 @@ return new class extends Migration
             $table->text('address')->nullable();
             $table->string('phone')->nullable();
             $table->string('email')->nullable();
-            $table->integer('division_id')->nullable();
-            $table->integer('department_id')->nullable();
-            $table->integer('position_id')->nullable();
-            $table->tinyInteger('status')->nullable();
-            $table->string('has_married')->nullable();
-            $table->date('start_contract')->nullable();
+            $table->integer('organization')->nullable();
+            $table->integer('division')->nullable();
+            $table->integer('department')->nullable();
+            $table->integer('position')->nullable();
+            $table->integer('manager_id')->nullable();
+            $table->tinyInteger('status')->default(1);
+            $table->date('start_at')->nullable();
+            $table->date('end_at')->nullable();
             $table->integer('created_by')->nullable();
             $table->integer('updated_by')->nullable();
             $table->integer('deleted_by')->nullable();
