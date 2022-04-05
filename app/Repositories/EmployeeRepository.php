@@ -49,9 +49,16 @@ class EmployeeRepository extends BaseRepository
 
     public function getById($id)
     {
-        $datas = $this->model->with(['user'])->find($id);
-
-        return $datas;
+        # code...
+        $data = $this->model
+        ->where('employees.id', $id)
+        ->leftJoin(config('database.connections.mysql_master.database') .'.organizations','employees.organization', '=', 'organizations.id')
+        ->leftJoin(config('database.connections.mysql_master.database') .'.divisions','employees.division', '=', 'divisions.id')
+        ->leftJoin(config('database.connections.mysql_master.database') .'.departments','employees.department', '=', 'departments.id')
+        ->leftJoin(config('database.connections.mysql_master.database') .'.positions','employees.position', '=', 'positions.id')
+        ->get(['employees.*', 'organizations.name as organization_name', 'divisions.name as division_name',
+         'departments.name as department_name', 'positions.name as position_name'])->last();
+        return $data;
     }
 
 }

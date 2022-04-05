@@ -22,10 +22,10 @@ class DepartmentService extends BaseService
         $this->repo = $repo;
     }
 
-    public function all()
+    public function all($request)
     {
         # code...
-        return $this->repo->with('division');
+        return $this->repo->index($request)->get();
     }
 
     public function index($request)
@@ -71,12 +71,12 @@ class DepartmentService extends BaseService
 
             $item = $this->repo->getById($id);
 
-            return $this->responseMessage(__('content.message.create.success'), 200, true, $item);
+            return $this->responseMessage(__('content.message.update.success'), 200, true, $item);
         } catch (Exception $exc) {
             # code...
             Log::error($exc);
             $db->rollback();
-            return $this->responseMessage(__('content.message.create.failed'), 400, false);
+            return $this->responseMessage(__('content.message.update.failed'), 400, false);
         }
     }
 

@@ -16,7 +16,28 @@ class DivisionRepository extends BaseRepository
     {
         # code...
         $data = $this->model
-        ->with('organization');
+        ->leftJoin('organizations','divisions.organization_id', '=', 'organizations.id')
+        ->select(['divisions.*', 'organizations.name as organization_name']);
+
+        if (isset($request->status)) {
+            # code...
+            $data->where('status', $request->status );
+        }
+
+        if (isset($request->name)) {
+            # code...
+            $data->where('name', 'LIKE', '%'.$request->name.'%' );
+        }
+        return $data;
+    }
+
+    public function getById($id)
+    {
+        # code...
+        $data = $this->model
+        ->where('divisions.id', $id)
+        ->leftJoin('organizations','divisions.organization_id', '=', 'organizations.id')
+        ->get(['divisions.*', 'organizations.name as organization_name'])->last();
         return $data;
     }
 

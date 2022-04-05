@@ -16,6 +16,17 @@ class OrganizationRepository extends BaseRepository
     {
         # code...
         $data = $this->model;
+
+        if (isset($request->status)) {
+            # code...
+            $data->where('status', $request->status );
+        }
+
+        if (isset($request->name)) {
+            # code...
+            $data->where('name', 'LIKE', '%'.$request->name.'%' );
+        }
+
         return $data;
     }
 

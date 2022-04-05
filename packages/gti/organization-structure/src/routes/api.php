@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => 'auth:api'], function () {
     Route::group(['prefix' => 'organizations'], function () {
+        Route::get('/all', [OrganizationController::class, 'all'])->name('organizations.all');
         Route::get('/', [OrganizationController::class, 'index'])->name('organizations.index');
         Route::get('/{id}', [OrganizationController::class, 'show'])->name('organizations.show');
         Route::post('/add', [OrganizationController::class, 'store'])->name('organizations.store');
