@@ -28,7 +28,8 @@
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/",
-            "GTI\\OrganizationStructure\\": "packages/gti/organization-structure/src"
+            "GTI\\OrganizationStructure\\": "packages/gti/organization-structure/src",
+            "GTI\\Attendance\\": "packages/gti/attendance/src"
         }
     },
     "autoload-dev": {

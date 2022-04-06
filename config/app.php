@@ -170,6 +170,7 @@ return [
 
         // GTI Package
         GTI\OrganizationStructure\OrganizationStructureServiceProvider::class,
+        GTI\Attendance\AttendanceServiceProvider::class,
         /*
          * Application Service Providers...
          */

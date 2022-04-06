@@ -29,8 +29,13 @@ class AuthController extends Controller
         return $this->service->logout();
     }
 
-    public function reset()
+    public function forgot(Request $request)
     {
-        return $this->service->reset();
+        return $this->service->forgot($request);
+    }
+
+    public function reset(Request $request)
+    {
+        return $this->service->reset($request);
     }
 }
