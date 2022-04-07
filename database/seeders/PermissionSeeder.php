@@ -185,7 +185,7 @@ class PermissionSeeder extends Seeder
 
         Employee::create([
             'nip' => 'admin',
-            'email' => 'superadmin@test.com',
+            'email' => 'admin@test.com',
         ]);
     }
 }
