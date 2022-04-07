@@ -40,6 +40,8 @@ class UpdateRequest extends FormRequest
             'position'=>'prohibited',
             'manager_id'=>'prohibited',
             'status'=>'prohibited',
+            'start_at'=>'prohibited',
+            'end_at'=>'prohibited',
 
         ];
     }
