@@ -52,10 +52,13 @@ class UserService extends BaseService
             $data = $request->all();
             $data['updated_by'] = $user->id;
             $data['birthdate'] = Carbon::parse($request->birthdate)->format('Y-m-d');
-            $email['email'] = $request->email;
             $this->repo->update($data, $user->employee->id);
-            $this->repoUser->update($email, $user->id);
-            $db->commit();
+            if ($request->email) {
+                # code...
+                $email['email'] = $request->email;
+                $this->repoUser->update($email, $user->id);
+                $db->commit();
+            }
 
             $item = $this->repo->getById($user->employee->id);
 
