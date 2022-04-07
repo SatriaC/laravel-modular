@@ -22,9 +22,8 @@ return new class extends Migration
             $table->time('duration')->nullable();
             $table->string('image')->nullable();
             $table->string('location')->nullable();
-            $table->float('latitude')->nullable();
-            $table->float('longitude')->nullable();
-            $table->string('location')->nullable();
+            $table->float('latitude',11,8)->nullable();
+            $table->float('longitude',11,8)->nullable();
             $table->tinyInteger('status')->default(1);
             $table->dateTime('approved_at')->nullable();
             $table->integer('approved_by')->nullable();

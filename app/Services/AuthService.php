@@ -28,14 +28,14 @@ class AuthService extends BaseService
         if (Auth::attempt(['email' => $item->user->email, 'password' => $request->password])) {
             $user = Auth::user();
             $data['access_token'] = $user->createToken('nApp')->accessToken;
-            // $permissions = array();
-            // $dataPermissions = $user->getPermissionsViaRoles();
+            $permissions = array();
+            $dataPermissions = $user->getPermissionsViaRoles();
 
-            // foreach ($dataPermissions as $item) {
-            //     array_push($permissions, $item->name);
-            // }
+            foreach ($dataPermissions as $item) {
+                array_push($permissions, $item->name);
+            }
 
-            // $data['permissions'] = $permissions;
+            $data['permissions'] = $permissions;
             return $this->responseMessage('Login Success', 200, true, $data);
         } else {
             return response()->json(

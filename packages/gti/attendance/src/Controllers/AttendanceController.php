@@ -43,10 +43,10 @@ class AttendanceController extends Controller
         return $this->service->checkIn($request);
     }
 
-    public function checkOut(Request $request)
+    public function checkOut(Request $request, $id)
     {
         # code...
-        return $this->service->checkOut($request);
+        return $this->service->checkOut($request, $id);
     }
 
     public function approve(Request $request, $id)

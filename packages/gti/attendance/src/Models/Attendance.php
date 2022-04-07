@@ -2,6 +2,7 @@
 
 namespace GTI\Attendance\Models;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -10,6 +11,7 @@ class Attendance extends Model
 {
     use SoftDeletes;
     use HasFactory;
+    protected $connection = 'mysql';
     protected $fillable = [
         'user_id',
         'date',
@@ -20,7 +22,6 @@ class Attendance extends Model
         'location',
         'latitude',
         'longitude',
-        'location',
         'status',
         'approved_at',
         'approved_by',
@@ -31,4 +32,10 @@ class Attendance extends Model
         'updated_by',
         'deleted_by',
     ];
+
+    public function user()
+    {
+        # code...
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }
