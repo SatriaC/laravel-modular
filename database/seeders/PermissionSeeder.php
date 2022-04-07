@@ -184,7 +184,7 @@ class PermissionSeeder extends Seeder
         $user2->assignRole($role2);
 
         Employee::create([
-            'nip' => 'superadmin',
+            'nip' => 'admin',
             'email' => 'superadmin@test.com',
         ]);
     }

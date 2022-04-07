@@ -3,6 +3,7 @@
 namespace GTI\Attendance\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\User\CheckinRequest;
 use GTI\Attendance\Services\AttendanceService;
 use GTI\OrganizationStructure\Services\DepartmentService;
 use Illuminate\Http\Request;
@@ -37,7 +38,7 @@ class AttendanceController extends Controller
         return $this->service->statistic($request);
     }
 
-    public function checkIn(Request $request)
+    public function checkIn(CheckinRequest $request)
     {
         # code...
         return $this->service->checkIn($request);

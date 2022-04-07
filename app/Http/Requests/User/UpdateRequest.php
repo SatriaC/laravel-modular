@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Employees;
-
+namespace App\Http\Requests\User;
 use Illuminate\Contracts\Validation\Validator;
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Foundation\Http\FormRequest;
 
-class EmployeeRequest extends FormRequest
+class UpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,7 +25,7 @@ class EmployeeRequest extends FormRequest
     public function rules()
     {
         return [
-            'nip'=>'required',
+            'nip'=>'prohibited',
             'nik'=>'required',
             'name'=>'required',
             'gender'=>'required',
@@ -35,11 +34,20 @@ class EmployeeRequest extends FormRequest
             'address'=>'required',
             'phone'=>'required',
             'email'=>'required',
-            'organization'=>'required',
-            'division'=>'required',
-            'department'=>'required',
-            'position'=>'required',
-            'start_at'=>'required',
+            'organization'=>'prohibited',
+            'division'=>'prohibited',
+            'department'=>'prohibited',
+            'position'=>'prohibited',
+            'manager_id'=>'prohibited',
+            'status'=>'prohibited',
+
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'prohibited' => ':attribute cannot be updated',
         ];
     }
 

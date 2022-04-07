@@ -48,6 +48,9 @@ class UserService extends BaseService
         $db->beginTransaction();
         try {
             # code...
+            $validated = $request->validate([
+                'nik' => 'required',
+            ]);
             $user = Auth::guard('api')->user();
             $data = $request->all();
             $data['updated_by'] = $user->id;

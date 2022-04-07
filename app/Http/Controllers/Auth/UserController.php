@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AuthRequest;
 use App\Http\Requests\ChangePasswordRequest;
+use App\Http\Requests\User\UpdateRequest;
 use App\Services\AuthService;
 use App\Services\UserService;
 use Illuminate\Http\Request;
@@ -26,7 +27,7 @@ class UserController extends Controller
         return $this->service->show();
     }
 
-    public function update(Request $request)
+    public function update(UpdateRequest $request)
     {
         return $this->service->update($request);
     }

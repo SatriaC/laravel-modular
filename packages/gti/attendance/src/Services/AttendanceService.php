@@ -54,17 +54,15 @@ class AttendanceService extends BaseService
         try {
             # code...
             $data = $request->all();
-            $data['date'] = Carbon::parse($request->date)->format('Y-m-d');
-            $data['start_at'] = Carbon::parse($request->start_at)->format('H:i:s');
+            $data['date'] = Carbon::now()->format('Y-m-d');
+            $data['start_at'] = Carbon::now()->format('H:i:s');
             $data['image'] = '';
+            $data['created_by'] = Auth::guard('api')->user()->id;
             $data['user_id'] = Auth::guard('api')->user()->id;
             $created = $this->repo->create($data);
             $db->commit();
-            // dd($created);
-            if (!empty($request->image)) {
-                $image = $this->image($request, $created->id);
-                $data['image'] = $image;
-            }
+            $image = $this->image($request, $created->id);
+            $data['image'] = $image;
             $this->repo->update($data, $created->id);
             $db->commit();
 
@@ -87,8 +85,9 @@ class AttendanceService extends BaseService
         try {
             # code...
             $data = $request->all();
-            $data['end_at'] = Carbon::parse($request->end_at)->format('H:i:s');
+            $data['end_at'] = Carbon::now()->format('H:i:s');
             $duration = $this->duration($id, $request);
+            $data['updated_by'] = Auth::guard('api')->user()->id;
             $data['duration'] = $duration;
             $this->repo->update($data, $id);
             $db->commit();
@@ -114,6 +113,7 @@ class AttendanceService extends BaseService
             # code...
             $data['approved_by'] = Auth::guard('api')->user()->id;
             $data['approved_at'] = date('Y-m-d H:i:s');
+            $data['updated_by'] = Auth::guard('api')->user()->id;
             $data['status'] = 2;
             $this->repo->update($data, $id);
             $db->commit();
@@ -140,6 +140,7 @@ class AttendanceService extends BaseService
             $data = $request->all();
             $data['reject_by'] = Auth::guard('api')->user()->id;
             $data['reject_at'] = date('Y-m-d H:i:s');
+            $data['updated_by'] = Auth::guard('api')->user()->id;
             $data['status'] = 3;
             $this->repo->update($data, $id);
             $db->commit();
